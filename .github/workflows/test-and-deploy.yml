@@ -10,6 +10,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+    
     strategy:
       matrix:
         node-version: [18.x, 20.x]
@@ -77,6 +80,9 @@ jobs:
 
   code-quality:
     runs-on: ubuntu-latest
+    
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     
     steps:
     - name: Checkout code
