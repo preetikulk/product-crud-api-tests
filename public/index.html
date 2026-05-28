@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product CRUD API - Web Application</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>📦 Product Management System</h1>
+                    <p>Complete REST API Web Interface for CRUD Operations</p>
+                </div>
+                <div class="header-right">
+                    <div class="user-section">
+                        <span class="username">Welcome, <strong id="usernameDisplay">User</strong>!</span>
+                        <button id="logoutBtn" class="btn-logout" onclick="logout()">🚪 Logout</button>
+                    </div>
+                    <div class="api-status">
+                        <span id="apiStatus" class="status-badge loading">Checking API...</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sidebar Navigation -->
+            <nav class="sidebar">
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active" data-tab="products">📋 All Products</a></li>
+                    <li><a href="#" class="nav-link" data-tab="create">➕ Create Product</a></li>
+                    <li><a href="#" class="nav-link" data-tab="update">✏️ Update Product</a></li>
+                </ul>
+            </nav>
+
+            <!-- Tab Content -->
+            <section class="content">
+                <!-- All Products Tab -->
+                <div id="products" class="tab-content active">
+                    <div class="section-header">
+                        <h2>📋 All Products</h2>
+                        <button id="refreshBtn" class="btn btn-primary">🔄 Refresh</button>
+                    </div>
+                    <div id="productsContainer" class="products-grid">
+                        <div class="loading-spinner">
+                            <div class="spinner"></div>
+                            <p>Loading products...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Create Product Tab -->
+                <div id="create" class="tab-content">
+                    <div class="section-header">
+                        <h2>➕ Create New Product</h2>
+                    </div>
+                    <form id="createForm" class="form">
+                        <div class="form-group">
+                            <label for="createName">Product Name *</label>
+                            <input type="text" id="createName" placeholder="e.g., Gaming Laptop" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="createCategory">Category *</label>
+                            <select id="createCategory" required>
+                                <option value="">Select a category</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Accessories">Accessories</option>
+                                <option value="Software">Software</option>
+                                <option value="Books">Books</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="createPrice">Price (₹) *</label>
+                                <input type="number" id="createPrice" placeholder="50000" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="createStock">Stock Quantity *</label>
+                                <input type="number" id="createStock" placeholder="10" min="0" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-lg">Create Product</button>
+                    </form>
+                    <div id="createResponse" class="response-message"></div>
+                </div>
+
+                <!-- Update Product Tab -->
+                <div id="update" class="tab-content">
+                    <div class="section-header">
+                        <h2>✏️ Update Existing Product</h2>
+                    </div>
+                    <form id="updateForm" class="form">
+                        <div class="form-group">
+                            <label for="updateId">Product ID *</label>
+                            <input type="number" id="updateId" placeholder="Enter product ID" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="updateName">Product Name</label>
+                            <input type="text" id="updateName" placeholder="Leave empty to keep current">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateCategory">Category</label>
+                            <select id="updateCategory">
+                                <option value="">Keep current</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Accessories">Accessories</option>
+                                <option value="Software">Software</option>
+                                <option value="Books">Books</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="updatePrice">Price (₹)</label>
+                                <input type="number" id="updatePrice" placeholder="Leave empty to keep current" min="0" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label for="updateStock">Stock Quantity</label>
+                                <input type="number" id="updateStock" placeholder="Leave empty to keep current" min="0">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-warning btn-lg">Update Product</button>
+                    </form>
+                    <div id="updateResponse" class="response-message"></div>
+                </div>
+
+
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Product CRUD API Web Application | API Base URL: <code>http://localhost:3000/api</code></p>
+            <p>Status: <span class="status-online">✓ Online</span> | Last Updated: <span id="lastUpdated">Just now</span></p>
+        </footer>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

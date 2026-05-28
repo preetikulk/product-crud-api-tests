@@ -1,0 +1,20 @@
+{
+  "name": "product-api",
+  "version": "1.0.0",
+  "description": "Product CRUD API for testing",
+  "main": "product-api.js",
+  "scripts": {
+    "start": "node product-api.js",
+    "test": "playwright test",
+    "test:api": "playwright test tests/api-tests/"
+  },
+  "keywords": ["api", "crud", "products"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  }
+}
